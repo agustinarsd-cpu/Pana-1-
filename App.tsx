@@ -8,6 +8,8 @@ import Calculator from './components/Calculator';
 import { BakeryProvider, useBakery } from './context/BakeryContext';
 import { View, ProductionLogEntry } from './types';
 import NotificationContainer from './components/NotificationContainer';
+import { DashboardIcon, RecipeIcon, InventoryIcon, ProductsIcon, CalculatorIcon, ClipboardListIcon } from './components/icons/NavIcons';
+
 
 // Fix: Moved ProductionLog component from `types.ts` to `App.tsx` to resolve file content and structural issues.
 const ProductionLog: React.FC = () => {
@@ -46,6 +48,46 @@ const ProductionLog: React.FC = () => {
   );
 };
 
+interface BottomNavProps {
+  currentView: View;
+  setCurrentView: (view: View) => void;
+}
+
+const BottomNavItem: React.FC<{
+  icon: React.ReactNode;
+  label: string;
+  view: View;
+  currentView: View;
+  onClick: (view: View) => void;
+}> = ({ icon, label, view, currentView, onClick }) => (
+  <button
+    onClick={() => onClick(view)}
+    className={`flex flex-col items-center justify-center flex-1 p-1 transition-colors duration-200 ${
+      currentView === view
+        ? 'text-brand-accent'
+        : 'text-brand-brown hover:text-brand-dark'
+    }`}
+    aria-label={label}
+  >
+    {icon}
+    <span className="text-xs mt-1">{label}</span>
+  </button>
+);
+
+const BottomNav: React.FC<BottomNavProps> = ({ currentView, setCurrentView }) => {
+  return (
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-brand-sand border-t border-brand-dark/10 shadow-lg flex justify-around items-center h-16 z-40">
+      <BottomNavItem icon={<DashboardIcon size={20} />} label="Dashboard" view="dashboard" currentView={currentView} onClick={setCurrentView} />
+      <BottomNavItem icon={<RecipeIcon size={20} />} label="Recetas" view="recipes" currentView={currentView} onClick={setCurrentView} />
+      <BottomNavItem icon={<InventoryIcon size={20} />} label="Inventario" view="inventory" currentView={currentView} onClick={setCurrentView} />
+      <BottomNavItem icon={<ProductsIcon size={20} />} label="Productos" view="products" currentView={currentView} onClick={setCurrentView} />
+      <BottomNavItem icon={<CalculatorIcon size={20} />} label="Calcular" view="calculator" currentView={currentView} onClick={setCurrentView} />
+      <BottomNavItem icon={<ClipboardListIcon size={20} />} label="Historial" view="productionLog" currentView={currentView} onClick={setCurrentView} />
+    </nav>
+  );
+};
+
+
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>('dashboard');
 
@@ -71,10 +113,11 @@ const App: React.FC = () => {
     <BakeryProvider>
       <div className="flex h-screen bg-brand-cream text-brand-dark font-sans">
         <Sidebar currentView={currentView} setCurrentView={setCurrentView} />
-        <main className="flex-1 p-4 sm:p-6 lg:p-10 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-10 overflow-y-auto pb-20 md:pb-10">
           {renderView()}
         </main>
         <NotificationContainer />
+        <BottomNav currentView={currentView} setCurrentView={setCurrentView} />
       </div>
     </BakeryProvider>
   );

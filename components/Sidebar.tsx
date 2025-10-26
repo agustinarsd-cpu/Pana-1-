@@ -23,19 +23,19 @@ const NavItem: React.FC<{
     }`}
   >
     {icon}
-    <span className="ml-4 text-sm hidden md:inline">{label}</span>
+    <span className="ml-4 text-sm">{label}</span>
   </button>
 );
 
 const Sidebar: React.FC<SidebarProps> = ({ currentView, setCurrentView }) => {
   return (
-    <aside className="w-16 md:w-64 bg-brand-sand p-4 flex flex-col justify-between shadow-lg">
+    <aside className="hidden md:flex w-64 bg-brand-sand p-4 flex-col justify-between shadow-lg">
       <div>
-        <div className="flex items-center justify-center md:justify-start mb-10 p-2">
+        <div className="flex items-center justify-start mb-10 p-2">
           <svg className="w-10 h-10 text-brand-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v11.494m-5.45-5.04l10.9 0M17.46 12a5.45 5.45 0 11-10.9 0 5.45 5.45 0 0110.9 0z"/>
           </svg>
-          <h1 className="text-xl font-bold text-brand-dark ml-3 hidden md:inline">Panadería</h1>
+          <h1 className="text-xl font-bold text-brand-dark ml-3">Panadería</h1>
         </div>
         <nav className="space-y-3">
           <NavItem icon={<DashboardIcon />} label="Dashboard" view="dashboard" currentView={currentView} onClick={setCurrentView} />
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setCurrentView }) => {
           <NavItem icon={<ClipboardListIcon />} label="Historial" view="productionLog" currentView={currentView} onClick={setCurrentView} />
         </nav>
       </div>
-       <div className="text-center text-xs text-brand-brown hidden md:block">
+       <div className="text-center text-xs text-brand-brown">
         <p>&copy; 2024 Panadería Maestra</p>
       </div>
     </aside>

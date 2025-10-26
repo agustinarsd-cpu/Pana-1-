@@ -158,15 +158,15 @@ const Recipes: React.FC = () => {
           <textarea placeholder="Instrucciones" value={newRecipe.instructions} onChange={e => setNewRecipe({ ...newRecipe, instructions: e.target.value })} className="w-full p-2 border border-gray-200 bg-gray-50 rounded-md h-24 focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
           <input type="number" placeholder="Rendimiento (latas)" value={newRecipe.yield || ''} onChange={e => setNewRecipe({ ...newRecipe, yield: parseInt(e.target.value, 10) || 0 })} className="w-full p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
           
-          <h3 className="font-semibold">Ingredientes</h3>
+          <h3 className="font-semibold pt-2">Ingredientes</h3>
           {newRecipe.ingredients.map((ing, index) => (
-            <div key={ing.id} className="grid grid-cols-12 gap-2 items-center">
-              <input type="text" placeholder="Nombre" value={ing.name} onChange={e => handleIngredientChange(index, 'name', e.target.value)} className="col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
-              <input type="number" placeholder="Cant." value={ing.quantity} onChange={e => handleIngredientChange(index, 'quantity', e.target.value)} className="col-span-3 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
-              <select value={ing.unit} onChange={e => handleIngredientChange(index, 'unit', e.target.value as Unit)} className="col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition">
+            <div key={ing.id} className="grid grid-cols-12 gap-2 items-center border-t pt-3 mt-3 first:mt-0 first:pt-0 first:border-0">
+              <input type="text" placeholder="Nombre" value={ing.name} onChange={e => handleIngredientChange(index, 'name', e.target.value)} className="col-span-12 sm:col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
+              <input type="number" placeholder="Cant." value={ing.quantity} onChange={e => handleIngredientChange(index, 'quantity', e.target.value)} className="col-span-5 sm:col-span-3 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
+              <select value={ing.unit} onChange={e => handleIngredientChange(index, 'unit', e.target.value as Unit)} className="col-span-5 sm:col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition">
                 {Object.values(Unit).map(u => <option key={u} value={u}>{u}</option>)}
               </select>
-              <button onClick={() => handleRemoveIngredient(index)} className="col-span-1 text-red-500 hover:text-red-700"><TrashIcon /></button>
+              <button onClick={() => handleRemoveIngredient(index)} className="col-span-2 sm:col-span-1 justify-self-end text-red-500 hover:text-red-700 p-2"><TrashIcon /></button>
             </div>
           ))}
           <button onClick={handleAddIngredient} className="text-sm text-brand-brown hover:underline">+ Añadir ingrediente</button>
@@ -184,15 +184,15 @@ const Recipes: React.FC = () => {
             <textarea placeholder="Instrucciones" value={editingRecipe.instructions} onChange={e => handleEditInputChange('instructions', e.target.value)} className="w-full p-2 border border-gray-200 bg-gray-50 rounded-md h-24 focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
             <input type="number" placeholder="Rendimiento (latas)" value={editingRecipe.yield || ''} onChange={e => handleEditInputChange('yield', e.target.value)} className="w-full p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
             
-            <h3 className="font-semibold">Ingredientes</h3>
+            <h3 className="font-semibold pt-2">Ingredientes</h3>
             {editingRecipe.ingredients.map((ing, index) => (
-              <div key={ing.id} className="grid grid-cols-12 gap-2 items-center">
-                <input type="text" placeholder="Nombre" value={ing.name} onChange={e => handleEditIngredientChange(index, 'name', e.target.value)} className="col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
-                <input type="number" placeholder="Cant." value={ing.quantity} onChange={e => handleEditIngredientChange(index, 'quantity', e.target.value)} className="col-span-3 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
-                <select value={ing.unit} onChange={e => handleEditIngredientChange(index, 'unit', e.target.value as Unit)} className="col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition">
+              <div key={ing.id} className="grid grid-cols-12 gap-2 items-center border-t pt-3 mt-3 first:mt-0 first:pt-0 first:border-0">
+                <input type="text" placeholder="Nombre" value={ing.name} onChange={e => handleEditIngredientChange(index, 'name', e.target.value)} className="col-span-12 sm:col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
+                <input type="number" placeholder="Cant." value={ing.quantity} onChange={e => handleEditIngredientChange(index, 'quantity', e.target.value)} className="col-span-5 sm:col-span-3 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition"/>
+                <select value={ing.unit} onChange={e => handleEditIngredientChange(index, 'unit', e.target.value as Unit)} className="col-span-5 sm:col-span-4 p-2 border border-gray-200 bg-gray-50 rounded-md focus:bg-white focus:ring-2 focus:ring-brand-accent focus:border-transparent outline-none transition">
                   {Object.values(Unit).map(u => <option key={u} value={u}>{u}</option>)}
                 </select>
-                <button onClick={() => handleEditRemoveIngredient(index)} className="col-span-1 text-red-500 hover:text-red-700"><TrashIcon /></button>
+                <button onClick={() => handleEditRemoveIngredient(index)} className="col-span-2 sm:col-span-1 justify-self-end text-red-500 hover:text-red-700 p-2"><TrashIcon /></button>
               </div>
             ))}
             <button onClick={handleEditAddIngredient} className="text-sm text-brand-brown hover:underline">+ Añadir ingrediente</button>

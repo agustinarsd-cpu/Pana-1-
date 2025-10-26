@@ -54,7 +54,8 @@ const Inventory: React.FC = () => {
         </button>
       </header>
 
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-xl shadow-lg overflow-hidden">
         <table className="w-full text-left">
           <thead className="bg-gray-50">
             <tr>
@@ -85,6 +86,29 @@ const Inventory: React.FC = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-3">
+        {state.inventory.map(item => (
+          <div key={item.id} className="bg-white rounded-xl shadow-lg p-4">
+            <div className="flex justify-between items-start">
+              <div>
+                <p className="font-bold text-brand-dark">{item.name}</p>
+                <p className="text-sm text-gray-500">{item.stock.toLocaleString()} {item.unit}</p>
+              </div>
+              <button
+                onClick={() => {
+                  setSelectedItem(item.id);
+                  setIsModalOpen(true);
+                }}
+                className="bg-brand-sand text-brand-brown px-3 py-1 rounded-md text-sm font-semibold hover:bg-brand-accent hover:text-white transition-colors flex-shrink-0"
+              >
+                Ajustar
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Ajustar Stock">
